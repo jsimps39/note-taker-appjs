@@ -5,8 +5,14 @@ const path = require('path');
 
 const app = express();
 
+//path for index
 app.get('/', (req, res) => {
-  res.send('Note Taker');
+  res.sendFile(path.join(__dirname, './puclic/index.html'));
 });
 
-app.listen(PORT);
+//path for notes
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, './puclic/notes.html'));
+});
+
+app.listen(PORT, () => {});
