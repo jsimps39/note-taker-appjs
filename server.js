@@ -35,4 +35,12 @@ app.get('/api/notes', (req, res) => {
   res.json('succesfully saved');
 });
 
+app.delete('/api/notes/:id', (req, res) => {
+  const data = fs.readFileSync('./db/db.json', 'utf8');
+  const notes = JSON.parse(data).filter(note => note.id !== req.params.id);
+  const stringifyedNotes = JSON.stringify(notes, null, 2);
+  fs.writeFileSync('./db/db.json', stringifyedNotes);
+  res.json('note deleted');
+});
+
 app.listen(PORT, () => console.log('running at port 3001'));
