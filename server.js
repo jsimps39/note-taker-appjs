@@ -2,13 +2,17 @@ const express = require('express');
 const fs = require('fs');
 const PORT = process.env.PORT || 3001;
 const path = require('path');
-const { v4: uuid4 } = require('uuid')
+const { v4: uuid4 } = require('uuid');
 
 const app = express();
 
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.static('public'));
+
 //path for index
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, './puclic/index.html'));
+  res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
 //path for notes
